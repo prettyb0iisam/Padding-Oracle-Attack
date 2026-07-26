@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+
+if input("Password? ").strip() == open(".pw").read().strip():
+    print("Victory! Your flag:")
+    print(open("flag").read())
