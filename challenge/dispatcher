@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+
+import sys
+
+key = open(".key", "rb").read()
+cipher = AES.new(key=key, mode=AES.MODE_CBC)
+
+if len(sys.argv) > 1 and sys.argv[1] == "pw":
+    plaintext = open(".pw", "rb").read().strip()
+else:
+    plaintext = b"sleep"
+
+ciphertext = cipher.iv + cipher.encrypt(pad(plaintext, cipher.block_size))
+print(f"TASK: {ciphertext.hex()}")
